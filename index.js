@@ -1,56 +1,111 @@
-const form = document.getElementById("userForm");
-const dataTable = document.querySelector("#dataTable tbody");
+// DARK & LIGHT MODE
 
-let editingRow = null; // Track the row being edited
+const box = document.querySelector('.box');
+const button = document.querySelector('button');
 
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
+let isBlack = false;
 
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    if (editingRow) {
-        // Update the existing row
-        editingRow.cells[0].textContent = name;
-        editingRow.cells[1].textContent = email;
-        editingRow.cells[2].textContent = password;
-        editingRow = null; // Reset after updating
-    } else {
-        // Create a new row
-        const row = document.createElement('tr');
-        row.innerHTML = `
-           <td data-label="Name">${name}</td>
-           <td data-label="Email">${email}</td>
-           <td data-label="Password">${password}</td>
-           <td data-label="Action">
-               <button type="button">Delete</button>
-               <button type="button">Edit</button>
-           </td>`;
-        dataTable.appendChild(row);
-    }
-
-    form.reset(); // Clear form after submit
+button.addEventListener("click", function (){
+   if(isBlack){
+    box.style.background = "white";
+   } else{
+    box.style.background = "black";
+   }
+    isBlack = !isBlack;
 });
 
-dataTable.addEventListener('click', function (e) {
-    if (e.target.tagName === 'BUTTON') {
-        const row = e.target.closest('tr');
+// COUNTER
+const counter = document.getElementById('counter')
+const decrease = document.querySelector('.decrease');
+const reset = document.querySelector('.reset');
+const increase = document.querySelector('.increase');
 
-        if (e.target.textContent === 'Delete') {
-            if (confirm("Are you sure you want to delete this row?")) {
-                row.remove();
-            }
-        }
+let count = 0;
+decrease.addEventListener("click", function() {
+  if (count > 0) {
+    count--;
+    counter.textContent = count;
+  }
+});
 
-        if (e.target.textContent === 'Edit') {
-            // Set form values from the row
-            document.getElementById('name').value = row.cells[0].textContent;
-            document.getElementById('email').value = row.cells[1].textContent;
-            document.getElementById('password').value = row.cells[2].textContent;
+increase.addEventListener("click", function(){
+        count++;
+      counter.textContent = count;
+})
 
-            // Store this row to update later
-            editingRow = row;
-        }
+reset.addEventListener("click", function(){
+      count = 0;
+      counter.textContent = count;
+})
+
+
+//TODO-LIST
+const input = document.getElementsByTagName('input');
+const Addbutton = document.querySelector('.Addbtn');
+const taskList = document.querySelector('.tasklist');
+
+Addbutton.addEventListener("click", function(){
+    const task = input[0].value.trim();
+    
+    if(!task){
+      alert("please write the task");
+      return;
     }
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+       <span>${task}</span>
+       <button class='deleteBtn'>Delete</button>
+    `;
+
+    taskList.appendChild(li);
+    input[0].value = '';
+
+    const deleteBtn = li.querySelector('.deleteBtn');
+    deleteBtn.addEventListener("click", function(){
+      taskList.removeChild(li);
+    })
+});
+
+// LIVE CHARACTER COUNT
+const liveCount = document.querySelector('.livecount');
+const textarea = document.querySelector('textarea');
+
+textarea.addEventListener('input', function(){
+  const charCount = textarea.value.length;
+  liveCount.textContent = charCount;
+
+  if(charCount > 200){
+    alert("Character limit of 200 exceeded!");
+    textarea.value = textarea.value.slice(0, 200);
+    liveCount.textContent = 200;
+  }
+});
+
+// IMAGE SLIDER
+const previous = document.querySelector('.pre');
+const next = document.querySelector('.next');
+const slider = document.querySelector('.slider');
+
+  let img1 = `https://images.pexels.com/photos/32207802/pexels-photo-32207802.jpeg`;
+  let img2 = `https://images.pexels.com/photos/32785053/pexels-photo-32785053.jpeg`;
+  let img3 = `https://images.pexels.com/photos/32117661/pexels-photo-32117661.jpeg`;
+  let imgs =[img1, img2, img3];
+
+  let currentIndex = 0;
+
+next.addEventListener("click", function(){
+      currentIndex++;
+      if(currentIndex >= imgs.length){
+        currentIndex = 0;
+      }
+      slider.src = imgs[currentIndex];
+});
+
+previous.addEventListener("click", function(){
+      currentIndex--;
+      if(currentIndex < 0){
+        currentIndex = imgs.length-1;
+      }
+      slider.src = imgs[currentIndex];
 });

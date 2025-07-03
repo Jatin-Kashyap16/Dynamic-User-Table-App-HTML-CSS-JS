@@ -4,37 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.css"/>
 </head>
 <body>
-    <h1>Registration Form</h1>
-   <form action="" id="userForm">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name">
-    <br>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email">
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password">
-    <br>
-    <button type="submit" value="Submit">Submit</button>
-   </form>
 
-   <table id="dataTable">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        
-    </tbody>
-   </table>
-    
-<script src="index.js"></script>    
+<!-- DARK & LIGHT MODE -->
+ <h2>DARK & LIGHT MODE</h2>
+<div class="box"></div>
+<button>click</button>
+
+<!-- COUNTER  -->
+ <h2>COUNTER</h2>
+ <p id="counter">0</p>
+ <button class="decrease">decrease</button>
+ <button class="reset">reset</button>
+ <button class="increase">increase</button>
+
+ <!-- TODO-LIST -->
+  <H2>TODO LIST</H2>
+  <div><br/>
+     <input 
+       placeholder="enter task"
+       type="text"
+     />
+   <button class="Addbtn">Add</button>
+
+   <ul class="tasklist"></ul>
+  </div>
+
+  <!-- LIVE CHARACTER COUNT -->
+   <h2>LIVE CHARACTER COUNT</h2>
+   <p class="livecount">0</p>
+   <textarea></textarea>
+
+
+   <!-- IMAGE SLIDER -->
+    <h2>IMAGE SLIDER </h2>
+    <img class="slider" src="https://images.pexels.com/photos/32207802/pexels-photo-32207802.jpeg" style="height: 200px;" width="200px"/><br/><br/>
+    <button class="pre">pre</button>
+    <button class="next">next</button>
+ 
+<script src="index.js"></script>
 </body>
 </html>
